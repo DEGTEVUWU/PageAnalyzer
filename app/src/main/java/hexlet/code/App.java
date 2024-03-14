@@ -1,8 +1,11 @@
 package hexlet.code;
 
+import gg.jte.ContentType;
+import gg.jte.TemplateEngine;
+import gg.jte.resolve.ResourceCodeResolver;
 import hexlet.code.repository.*;
 
-
+import io.javalin.rendering.template.JavalinJte;
 import io.javalin.Javalin;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -32,12 +35,19 @@ public class App {
             statement.execute(sql);
         }
 
-        BaseRepository.dataSource = dataSource;
         //объект - источник данных для будущего исп в классах-контролерах, где будут выполняться разные запрсы в бд
+        BaseRepository.dataSource = dataSource;
 
+        //создать инстанс соединения и указать путь к jte-файлам для отрисовки
+        var app = Javalin.create(config -> {
+            config.fileRenderer(new JavalinJte(createTemplateEngine()));
+        });
 
-        var app = Javalin.create(/*config*/)
-                .get("/", ctx -> ctx.result("Hello World"));
+        //указываем запросы
+        app.get("/", ctx -> {
+            ctx.render("index.jte");
+        });
+
         return app;
     }
         public static String getDataBaseUrl() {
@@ -49,6 +59,12 @@ public class App {
     public static int getPort() {
         String port = System.getenv().getOrDefault("PORT", "7070");
         return Integer.valueOf(port);
+    }
+    private static TemplateEngine createTemplateEngine() {
+        ClassLoader classLoader = App.class.getClassLoader();
+        ResourceCodeResolver codeResolver = new ResourceCodeResolver("templates", classLoader);
+        TemplateEngine templateEngine = TemplateEngine.create(codeResolver, ContentType.Html);
+        return templateEngine;
     }
     public static void main(String[] args) throws IOException, SQLException, Exception {
         Javalin app = getApp();
