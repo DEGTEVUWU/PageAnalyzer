@@ -1,11 +1,13 @@
 @import gg.jte.Content
+@import hexlet.code.dto.BuildUrlPage
+@import hexlet.code.utils.NamedRoutes
 
 @param Content content
+@param BuildUrlPage page
 
 @template.layout.page(
 content  = @`
-    <h1>Заголовок моего локал-сайта!</h1>
-    <h2>Подзаголовок! Если ты читаешь - пожалуйста, пользуйся</h2>
+    <h2>Проверка сайтов на SEO-пригодность</h2>
 
     <h4>Тут ты увидишь:</h4>
     <ul>
@@ -15,6 +17,17 @@ content  = @`
         <li>А вообще будем анализировать страницы других сайтов</li>
 
     </ul>
+
+    <form action="${NamedRoutes.urlsPath()}" method="post">
+        <div class="mb-3">
+            <label class="form-label">
+                Адрес
+                <input type="text" class="form-control" name="url"/>
+            </label>
+        </div>
+        <input type="submit" value="Проверить" />
+    </form>
+    
 `
 ,
 footer = @`

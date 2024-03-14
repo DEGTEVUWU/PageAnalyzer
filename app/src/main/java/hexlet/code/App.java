@@ -3,8 +3,10 @@ package hexlet.code;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
+import hexlet.code.controllers.UrlController;
 import hexlet.code.repository.*;
 
+import hexlet.code.utils.NamedRoutes;
 import io.javalin.rendering.template.JavalinJte;
 import io.javalin.Javalin;
 import java.io.BufferedReader;
@@ -35,7 +37,7 @@ public class App {
             statement.execute(sql);
         }
 
-        //объект - источник данных для будущего исп в классах-контролерах, где будут выполняться разные запрсы в бд
+        //объект - источник данных для будущего исп в классах-контролерах, где будут выполняться разные запросы в бд
         BaseRepository.dataSource = dataSource;
 
         //создать инстанс соединения и указать путь к jte-файлам для отрисовки
@@ -43,10 +45,17 @@ public class App {
             config.fileRenderer(new JavalinJte(createTemplateEngine()));
         });
 
+
         //указываем запросы
-        app.get("/", ctx -> {
-            ctx.render("index.jte");
-        });
+        app.get(NamedRoutes.rootPath(), UrlController::root);
+
+//        app.get(NamedRoutes.buildUrlsPath(), UrlController::build);
+        app.post(NamedRoutes.urlsPath(), UrlController::create);
+        app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
+        app.get(NamedRoutes.urlsPath(), UrlController::index);
+
+
+
 
         return app;
     }
