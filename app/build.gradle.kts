@@ -1,4 +1,5 @@
 plugins {
+    application
     checkstyle
     java
     jacoco
@@ -10,12 +11,21 @@ plugins {
 
 group = "hexlet.code"
 version = "1.0-SNAPSHOT"
+application { mainClass.set("hexlet.code.App") }
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
+    implementation("io.javalin:javalin:5.6.1")
+    implementation("org.slf4j:slf4j-simple:2.0.7")
+    implementation("io.javalin:javalin-rendering:5.6.0")
+    implementation("gg.jte:jte:3.0.1")
+    implementation("gg.jte:jte:3.0.1")
+    implementation("io.javalin:javalin-rendering:5.6.2")
+    implementation("org.slf4j:slf4j-simple:2.0.10")//logger
+
     implementation("org.apache.commons:commons-lang3:3.14.0")
     implementation("org.apache.commons:commons-collections4:4.4")
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
