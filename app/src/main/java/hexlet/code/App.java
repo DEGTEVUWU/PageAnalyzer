@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 public class App {
-    public static Javalin getApp() throws SQLException {
+    public static Javalin getApp() throws IOException, SQLException {
         //создали бд в памяти машины
         var hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl(getDataBaseUrl());
@@ -48,11 +48,10 @@ public class App {
 
         //указываем запросы
         app.get(NamedRoutes.rootPath(), UrlController::root);
-
 //        app.get(NamedRoutes.buildUrlsPath(), UrlController::build);
         app.post(NamedRoutes.urlsPath(), UrlController::create);
-        app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
         app.get(NamedRoutes.urlsPath(), UrlController::index);
+        app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
 
 
 

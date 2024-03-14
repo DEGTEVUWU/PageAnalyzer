@@ -1,7 +1,11 @@
 @import gg.jte.Content
+@import hexlet.code.BasePage
+@import hexlet.code.utils.NamedRoutes
+@import javax.naming.Name
 
 @param Content content = null
 @param Content footer = null
+@param BasePage page = null
 
 <html lang="en">
 <head>
@@ -26,7 +30,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link" href="/">Ещё одна ссыль в хедере</a>
+                <a class="nav-link" href="${NamedRoutes.urlsPath()}">Список всех сайтов</a>
             </li>
 
 
@@ -35,6 +39,12 @@
 </nav>
 
 <main>
+
+    @if(page != null && page.getFlash() != null)
+        <div class="alert alert-${page.getFlashType()}" role="alert">
+            ${page.getFlash()}
+        </div>
+    @endif
 
     ${content}
 

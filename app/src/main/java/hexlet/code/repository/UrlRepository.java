@@ -21,8 +21,6 @@ import static hexlet.code.repository.BaseRepository.dataSource;
 
 public class UrlRepository extends BaseRepository {
 
-    private static List<Url> entities = new ArrayList<Url>();
-
     public static void save(Url url) throws SQLException {
         String sql = "INSERT INTO urls (name, created_at) VALUES (?, ?)";
         try (var conn = dataSource.getConnection();

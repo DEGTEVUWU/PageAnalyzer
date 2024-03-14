@@ -29,9 +29,9 @@ public class UrlController {
 
         UrlsPage page = new UrlsPage(urls);
 
-        //вывод флеш сообщения о создании курса
-        String flash = ctx.consumeSessionAttribute("flash");
-        page.setFlash(flash);
+        //вывод флеш сообщений о (не)добавлении сайта
+        page.setFlash(ctx.consumeSessionAttribute("flash"));
+        page.setFlashType(ctx.consumeSessionAttribute("flashType"));
 
         ctx.render("urls/index.jte", Collections.singletonMap("page", page));
     }
@@ -42,13 +42,11 @@ public class UrlController {
                 .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
 
         UrlPage page = new UrlPage(url);
+
         ctx.render("urls/show.jte", Collections.singletonMap("page", page));
     }
 
-    public static void build(Context ctx) {
-        var page = new BuildUrlPage();
-        ctx.render("index.jte", Collections.singletonMap("page", page));
-    }
+
     public static void create(Context ctx) throws SQLException, URISyntaxException {
         var beginnerUrl = ctx.formParam("url");
 

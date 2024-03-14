@@ -21,15 +21,16 @@ repositories {
 }
 
 dependencies {
+    implementation("io.javalin:javalin:6.1.3")
+    implementation("org.slf4j:slf4j-simple:2.0.10")//logger
+    implementation("io.javalin:javalin-rendering:6.1.3")
+    implementation("gg.jte:jte:3.0.1")
+    implementation("gg.jte:jte:3.0.1")
+
     implementation("com.googlecode.owasp-java-html-sanitizer:owasp-java-html-sanitizer:20220608.1")
 
-    implementation("io.javalin:javalin:6.1.3")
     implementation("io.javalin:javalin-bundle:6.1.3")
-    implementation("io.javalin:javalin-rendering:6.1.3")
 
-    implementation("gg.jte:jte:3.0.1")
-    implementation("gg.jte:jte:3.0.1")
-    implementation("org.slf4j:slf4j-simple:2.0.10")//logger
     implementation("com.h2database:h2:2.2.220") //для работы с бd
     implementation("com.zaxxer:HikariCP:5.0.1")//бд хикари
 
@@ -38,6 +39,9 @@ dependencies {
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:3.25.1")
+    compileOnly("org.projectlombok:lombok:1.18.30")
+    annotationProcessor("org.projectlombok:lombok:1.18.30")
+
 }
 
 tasks.test {
