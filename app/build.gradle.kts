@@ -25,6 +25,8 @@ dependencies {
     implementation("gg.jte:jte:3.0.1")
     implementation("io.javalin:javalin-rendering:5.6.2")
     implementation("org.slf4j:slf4j-simple:2.0.10")//logger
+    implementation("com.h2database:h2:2.2.220") //для работы с бd
+    implementation("com.zaxxer:HikariCP:5.0.1")//бд хикари
 
     implementation("org.apache.commons:commons-lang3:3.14.0")
     implementation("org.apache.commons:commons-collections4:4.4")
