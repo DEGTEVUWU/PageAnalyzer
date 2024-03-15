@@ -1,6 +1,5 @@
 package hexlet.code.controllers;
 
-import hexlet.code.BasePage;
 import hexlet.code.dto.BuildUrlPage;
 import hexlet.code.dto.UrlPage;
 import hexlet.code.dto.UrlsPage;
@@ -17,12 +16,11 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.List;
 
 public class UrlController {
-    public static void root (Context ctx) {
+    public static void root(Context ctx) {
         ctx.render("index.jte");
         ctx.consumeSessionAttribute("flash");
         ctx.consumeSessionAttribute("errorFlash");
@@ -72,22 +70,9 @@ public class UrlController {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.sessionAttribute("flashType", "info");
                 ctx.redirect(NamedRoutes.urlsPath());
-            }
-
-//            ctx.formParamAsClass("name", String.class)
-//                    .check(value -> {
-//                                try {
-//                                    return UrlRepository.getEntities().stream()
-//                                            .noneMatch(url -> url.getName().equals(value));
-//                                } catch (SQLException e) {
-//                                    throw new RuntimeException(e);
-//                                }
-//                            },
-//                            "Страница уже существует")
-//                    .get();
-
-            else {
-                //добавить в объект класса урл приведённую к нужному виду ссыль-имя сайта, с кем мы работаем, записать в бд
+            } else {
+                //добавить в объект класса урл приведённую к нужному виду ссыль-имя сайта,
+                // с кем мы работаем, записать в бд
                 Url resultUrl = new Url(name);
                 UrlRepository.save(resultUrl);
 

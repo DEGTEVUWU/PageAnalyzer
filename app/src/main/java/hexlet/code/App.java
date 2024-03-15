@@ -4,7 +4,7 @@ import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
 import hexlet.code.controllers.UrlController;
-import hexlet.code.repository.*;
+import hexlet.code.repository.BaseRepository;
 
 import hexlet.code.utils.NamedRoutes;
 import io.javalin.rendering.template.JavalinJte;
@@ -60,11 +60,9 @@ public class App {
         app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
 
 
-
-
         return app;
     }
-        public static String getDataBaseUrl() {
+    public static String getDataBaseUrl() {
         String url = System.getenv().getOrDefault("JDBC_DATABASE_URL",
                 "jdbc:h2:mem:hexlet_project;DB_CLOSE_DELAY=-1;");
         return url;

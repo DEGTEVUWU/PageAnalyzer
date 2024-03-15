@@ -29,7 +29,6 @@ dependencies {
 
     implementation("com.googlecode.owasp-java-html-sanitizer:owasp-java-html-sanitizer:20220608.1")
 
-    implementation("io.javalin:javalin-bundle:6.1.3")
 
     implementation("com.h2database:h2:2.2.220") //для работы с бd
     implementation("com.zaxxer:HikariCP:5.0.1")//бд хикари
@@ -40,6 +39,7 @@ dependencies {
     implementation("org.apache.commons:commons-collections4:4.4")
     implementation("commons-validator:commons-validator:1.8.0")
 
+    implementation("io.javalin:javalin-bundle:6.1.3")//для тестировония проекта на джавалине
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")
     testImplementation("org.assertj:assertj-core:3.25.1")
