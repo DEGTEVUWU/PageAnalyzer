@@ -4,7 +4,7 @@ import hexlet.code.dto.BuildUrlPage;
 import hexlet.code.utils.NamedRoutes;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,11,11,17,17,17,17,17,17,17,17,23,23,23,23,23,23,23,23,33,33,33,33,37,37,37};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,12,12,18,18,18,18,18,18,18,18,24,24,24,24,24,24,24,24,34,34,34,34,38,38,38};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content content, BuildUrlPage page) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
@@ -31,7 +31,7 @@ public final class JteindexGenerated {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
 				jteOutput.writeContent("\r\n    <div class=\"footer\">\r\n        <a href=\"https://github.com/DEGTEVUWU\">Дёгтев Иван - профиль на GitHub</a>\r\n    </div>\r\n");
 			}
-		}, null);
+		}, page);
 	}
 	public static void renderMap(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, java.util.Map<String, Object> params) {
 		Content content = (Content)params.get("content");

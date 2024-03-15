@@ -6,6 +6,7 @@
 @param BuildUrlPage page
 
 @template.layout.page(
+    page = page,
 content  = @`
     <h2>Проверка сайтов на SEO-пригодность</h2>
 
