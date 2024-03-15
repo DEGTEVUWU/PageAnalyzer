@@ -33,8 +33,8 @@ dependencies {
 
     implementation("com.h2database:h2:2.2.220") //для работы с бd
     implementation("com.zaxxer:HikariCP:5.0.1")//бд хикари
-    implementation("org.postgresql:postgresql:42.7.2")
-    implementation("com.mysql:mysql-connector-j:8.3.0")
+    implementation("org.postgresql:postgresql:42.7.2") //для работы с  бд типа postgresql
+    implementation("com.mysql:mysql-connector-j:8.3.0") //драйвер для работы с бд в принципе
 
     implementation("org.apache.commons:commons-lang3:3.14.0")
     implementation("org.apache.commons:commons-collections4:4.4")
