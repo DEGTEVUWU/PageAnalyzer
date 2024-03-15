@@ -19,6 +19,10 @@ import java.util.stream.Collectors;
 
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
+
 public class App {
     public static Javalin getApp() throws IOException, SQLException {
         //создали бд в памяти машины
@@ -26,10 +30,11 @@ public class App {
         hikariConfig.setJdbcUrl(getDataBaseUrl());
         var dataSource = new HikariDataSource(hikariConfig);
 
-        // Получаем путь до файла с базовыми sql-запросами по настройке таблиц в src/main/resources
+        //Получаем путь до файла с базовыми sql-запросами по настройке таблиц в src/main/resources
         var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
         var sql = new BufferedReader(new InputStreamReader(url))
                 .lines().collect(Collectors.joining("\n"));
+        log.info(sql);
 
         // Получаем соединение, создаем стейтмент и выполняем запрос
         try (Connection connection = dataSource.getConnection();
