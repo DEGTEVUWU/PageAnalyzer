@@ -1,14 +1,12 @@
 package hexlet.code.dto;
 
 import hexlet.code.BasePage;
-import hexlet.code.model.Url;
 import io.javalin.validation.ValidationError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
