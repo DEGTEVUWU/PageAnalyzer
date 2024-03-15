@@ -30,6 +30,7 @@ public class App {
         hikariConfig.setJdbcUrl(getDataBaseUrl());
         var dataSource = new HikariDataSource(hikariConfig);
 
+
         //Получаем путь до файла с базовыми sql-запросами по настройке таблиц в src/main/resources
         var url = App.class.getClassLoader().getResourceAsStream("schema.sql");
         var sql = new BufferedReader(new InputStreamReader(url))
