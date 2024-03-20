@@ -1,6 +1,7 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
+import hexlet.code.model.UrlCheck;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static hexlet.code.repository.BaseRepository.dataSource;
-
 
 
 public class UrlRepository extends BaseRepository {
@@ -82,4 +82,5 @@ public class UrlRepository extends BaseRepository {
             return result;
         }
     }
+
 }

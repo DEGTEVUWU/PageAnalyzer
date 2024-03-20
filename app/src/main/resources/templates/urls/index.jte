@@ -16,15 +16,40 @@ content  = @`
             @else
 
                 <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <td>
+                            ID
+                        </td>
+                        <td>
+                            Имя
+                        </td>
+                        <td>
+                            Последняя проверка
+                        </td>
+                        <td>
+                            Код ответа
+                        </td>
+                    </tr>
+                    </thead>
                     @for(var url : page.getUrls())
+                        <tbody>
                         <tr>
                             <td>
                                 ${url.getId()}
                             </td>
                             <td>
-                                <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} ${String.valueOf(url.getCreatedAt())}</a>
+                                <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
+                            </td>
+                            <td>
+                                ${String.valueOf(url.getCreatedAt())}
+                            </td>
+                            <td>
+                                Eee!
+<%--                                тут код ответа будет--%>
                             </td>
                         </tr>
+                        </tbody>
                     @endfor
                 </table>
             @endif

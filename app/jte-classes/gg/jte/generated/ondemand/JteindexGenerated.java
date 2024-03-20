@@ -4,7 +4,7 @@ import hexlet.code.dto.BuildUrlPage;
 import hexlet.code.utils.NamedRoutes;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,12,12,18,18,18,18,18,18,18,18,24,24,24,24,24,24,24,24,34,34,34,34,38,38,38};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,12,12,18,18,18,18,18,18,18,18,23,23,23,23,23,23,23,23,33,33,33,33,37,37,37};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content content, BuildUrlPage page) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
@@ -17,7 +17,7 @@ public final class JteindexGenerated {
 					jteOutput.setContext("a", null);
 					jteOutput.writeContent("\"");
 				}
-				jteOutput.writeContent(">Список всех добавленных сайтов</a></li>\r\n        <li>Инфу про каждый конкретный сайт</li>\r\n        <li>А вообще будем анализировать страницы других сайтов</li>\r\n\r\n    </ul>\r\n\r\n    <form");
+				jteOutput.writeContent(">Список всех добавленных сайтов</a></li>\r\n\r\n\r\n    </ul>\r\n\r\n    <form");
 				if (gg.jte.runtime.TemplateUtils.isAttributeRendered(NamedRoutes.urlsPath())) {
 					jteOutput.writeContent(" action=\"");
 					jteOutput.setContext("form", "action");

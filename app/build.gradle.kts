@@ -35,10 +35,14 @@ dependencies {
     implementation("org.postgresql:postgresql:42.7.2") //для работы с  бд типа postgresql
     implementation("com.mysql:mysql-connector-j:8.3.0") //драйвер для работы с бд в принципе
 
+    implementation("com.konghq:unirest-java:3.14.5")//для простого создания разных HTTP\HTTPS-запросов
+    implementation ("org.jsoup:jsoup:1.17.2")
+
     implementation("org.apache.commons:commons-lang3:3.14.0")
     implementation("org.apache.commons:commons-collections4:4.4")
     implementation("commons-validator:commons-validator:1.8.0")
 
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.12.0") //для тестирования посылания запросов на другой сервер
     implementation("io.javalin:javalin-bundle:6.1.3")//для тестировония проекта на джавалине
     testImplementation(platform("org.junit:junit-bom:5.10.1"))
     testImplementation("org.junit.jupiter:junit-jupiter")

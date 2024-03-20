@@ -3,6 +3,7 @@ package hexlet.code;
 import gg.jte.ContentType;
 import gg.jte.TemplateEngine;
 import gg.jte.resolve.ResourceCodeResolver;
+import hexlet.code.controllers.CheckController;
 import hexlet.code.controllers.UrlController;
 import hexlet.code.repository.BaseRepository;
 
@@ -54,10 +55,10 @@ public class App {
 
         //указываем запросы
         app.get(NamedRoutes.rootPath(), UrlController::root);
-//        app.get(NamedRoutes.buildUrlsPath(), UrlController::build);
         app.post(NamedRoutes.urlsPath(), UrlController::create);
         app.get(NamedRoutes.urlsPath(), UrlController::index);
         app.get(NamedRoutes.urlPath("{id}"), UrlController::show);
+        app.post(NamedRoutes.urlPath("{id}"), CheckController::check);
 
 
         return app;

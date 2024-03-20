@@ -4,6 +4,8 @@ import hexlet.code.dto.BuildUrlPage;
 import hexlet.code.dto.UrlPage;
 import hexlet.code.dto.UrlsPage;
 import hexlet.code.model.Url;
+import hexlet.code.model.UrlCheck;
+import hexlet.code.repository.CheckRepository;
 import hexlet.code.repository.UrlRepository;
 import hexlet.code.utils.NamedRoutes;
 import io.javalin.http.Context;
@@ -16,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -42,9 +45,17 @@ public class UrlController {
         Url url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
 
-        UrlPage page = new UrlPage(url);
-
-        ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+        if (CheckRepository.findExisting(url.getId())) {
+            List<UrlCheck> listWithChecks = new ArrayList<>();
+            listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
+            UrlPage page = new UrlPage(url, listWithChecks);
+            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+        } else {
+            UrlPage page = new UrlPage(url, null);
+            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+        }
+//        UrlPage page = new UrlPage(url, null);
+//        ctx.render("urls/show.jte", Collections.singletonMap("page", page));
     }
 
 
@@ -93,4 +104,5 @@ public class UrlController {
         UrlValidator validator = new UrlValidator(schemas, UrlValidator.ALLOW_LOCAL_URLS);
         return validator.isValid(url);
     }
+
 }

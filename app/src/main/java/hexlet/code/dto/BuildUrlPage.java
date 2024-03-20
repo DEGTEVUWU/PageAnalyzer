@@ -16,7 +16,6 @@ import java.util.Map;
 @NoArgsConstructor
 public class BuildUrlPage extends BasePage {
     private String name;
-//    private Timestamp created_at;
     private Map<String, List<ValidationError<Object>>> errors;
 
     public BuildUrlPage(Map<String, List<ValidationError<Object>>> errors) {
