@@ -9,6 +9,7 @@ import io.javalin.http.InternalServerErrorResponse;
 import io.javalin.http.NotFoundResponse;
 import io.javalin.validation.ValidationException;
 import kong.unirest.Unirest;
+import kong.unirest.UnirestException;
 import org.jsoup.Jsoup;
 
 import java.sql.SQLException;
@@ -40,11 +41,10 @@ public class CheckController {
 
             ctx.sessionAttribute("flash", "Страница успешно проверена");
             ctx.sessionAttribute("flashType", "success");
-        } catch (ValidationException e) {
+        } catch (UnirestException  e) {
             ctx.sessionAttribute("flash", "Некорректный адрес");
             ctx.sessionAttribute("flashType", "danger");
         }
-
         ctx.redirect(NamedRoutes.urlPath(url.getId()));
     }
 }

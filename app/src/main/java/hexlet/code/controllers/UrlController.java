@@ -47,6 +47,8 @@ public class UrlController {
             listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
 
             UrlPage page = new UrlPage(url, listWithChecks);
+            page.setFlash(ctx.consumeSessionAttribute("flash"));
+            page.setFlashType(ctx.consumeSessionAttribute("flashType"));
             ctx.render("urls/show.jte", Collections.singletonMap("page", page));
         } else {
             UrlPage page = new UrlPage(url, null);

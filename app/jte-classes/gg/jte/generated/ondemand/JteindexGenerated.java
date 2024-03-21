@@ -4,20 +4,12 @@ import hexlet.code.dto.BuildUrlPage;
 import hexlet.code.utils.NamedRoutes;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,12,12,18,18,18,18,18,18,18,18,23,23,23,23,23,23,23,23,33,33,33,33,37,37,37};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,12,12,20,20,20,20,20,20,20,20,40,40,40,40,44,44,44};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, Content content, BuildUrlPage page) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\r\n    <h2>Проверка сайтов на SEO-пригодность</h2>\r\n\r\n    <h4>Тут ты увидишь:</h4>\r\n    <ul>\r\n        <li><a href=\"/\">Главную страницу</a></li>\r\n        <li><a");
-				if (gg.jte.runtime.TemplateUtils.isAttributeRendered(NamedRoutes.urlsPath())) {
-					jteOutput.writeContent(" href=\"");
-					jteOutput.setContext("a", "href");
-					jteOutput.writeUserContent(NamedRoutes.urlsPath());
-					jteOutput.setContext("a", null);
-					jteOutput.writeContent("\"");
-				}
-				jteOutput.writeContent(">Список всех добавленных сайтов</a></li>\r\n\r\n\r\n    </ul>\r\n\r\n    <form");
+				jteOutput.writeContent("\r\n            <div class=\"container-fluid bg-dark p-5\">\r\n            <div class=\"row\">\r\n                <div class=\"col-md-10 col-lg-8 mx-auto text-white\">\r\n    <h1 class=\"display-3 mb-0\">Анализатор страниц</h1>\r\n    <p class=\"lead\">Бесплатно проверяйте сайты на SEO пригодность</p>\r\n\r\n\r\n    <form");
 				if (gg.jte.runtime.TemplateUtils.isAttributeRendered(NamedRoutes.urlsPath())) {
 					jteOutput.writeContent(" action=\"");
 					jteOutput.setContext("form", "action");
@@ -25,7 +17,7 @@ public final class JteindexGenerated {
 					jteOutput.setContext("form", null);
 					jteOutput.writeContent("\"");
 				}
-				jteOutput.writeContent(" method=\"post\">\r\n        <div class=\"mb-3\">\r\n            <label class=\"form-label\">\r\n                Адрес\r\n                <input type=\"text\" class=\"form-control\" name=\"url\"/>\r\n            </label>\r\n        </div>\r\n        <input type=\"submit\" value=\"Проверить\" />\r\n    </form>\r\n    \r\n");
+				jteOutput.writeContent(" method=\"post\" class=\"rss-form text-body\">\r\n        <div class=\"row\">\r\n            <div class=\"col\">\r\n                <div class=\"form-floating\">\r\n                    <input id=\"url-input\" autofocus=\"\" type=\"text\" required=\"\" name=\"url\" aria-label=\"url\" class=\"form-control w-100\" placeholder=\"ссылка\" autocomplete=\"off\">\r\n                    <label for=\"url-input\">Ссылка</label>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-auto\">\r\n                <button type=\"submit\" class=\"h-100 btn btn-lg btn-primary px-sm-5\">Проверить</button>\r\n            </div>\r\n        </div>\r\n    </form>\r\n\r\n    <p class=\"mt-2 mb-0 text-muted\">Пример: https://www.example.com</p>\r\n</div>\r\n</div>\r\n            </div>\r\n\r\n\r\n");
 			}
 		}, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
