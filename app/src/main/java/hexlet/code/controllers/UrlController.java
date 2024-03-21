@@ -13,8 +13,6 @@ import io.javalin.http.NotFoundResponse;
 import io.javalin.validation.ValidationException;
 import org.apache.commons.validator.routines.UrlValidator;
 
-
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -30,9 +28,7 @@ public class UrlController {
     }
     public static void index(Context ctx) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
-//        List<UrlCheck> urlChecks = CheckRepository.getEntities();
         UrlsPage page = new UrlsPage(urls);
-//        UrlCheck urlCheck = new UrlCheck(urlChecks);
 
         //вывод флеш сообщений о (не)добавлении сайта
         page.setFlash(ctx.consumeSessionAttribute("flash"));
@@ -59,14 +55,12 @@ public class UrlController {
     }
 
 
-    public static void create(Context ctx) throws SQLException, URISyntaxException, MalformedURLException {
+    public static void create(Context ctx) throws SQLException, URISyntaxException {
         var beginnerUrl = ctx.formParam("url");
 
         try {
             var uri = new URI(beginnerUrl);
             String name = uri.getScheme() + "://" + uri.getAuthority();
-
-//            uri.toURL();
 
             if (!validateUrl(name)) {
                 ctx.sessionAttribute("flash", "Некорректный URL");
@@ -82,22 +76,16 @@ public class UrlController {
                 ctx.sessionAttribute("flashType", "info");
                 ctx.redirect(NamedRoutes.urlsPath());
             } else {
-                //добавить в объект класса урл приведённую к нужному виду ссыль-имя сайта,
-                // с кем мы работаем, записать в бд
-//                Date actualDate = new Date();
-//                Timestamp createdAt = new Timestamp(actualDate.getTime());
-                Url resultUrl = new Url(name);
-                UrlRepository.save(resultUrl);
 
+                Url resultUrl = new Url(name); //добавить в объект класса урл приведённую к нужному виду ссыль-имя сайта, с кем мы работаем, записать в бд
+                UrlRepository.save(resultUrl);
                 ctx.sessionAttribute("flash", "Страница успешно добавлена");
                 ctx.sessionAttribute("flashType", "success");
-
                 ctx.redirect(NamedRoutes.urlsPath());
             }
 
         } catch (ValidationException e) {
             var page = new BuildUrlPage(beginnerUrl, e.getErrors());
-
             ctx.status(422).render("index.jte", Collections.singletonMap("page", page));
         }
     }

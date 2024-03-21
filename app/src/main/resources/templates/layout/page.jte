@@ -1,7 +1,6 @@
 @import gg.jte.Content
 @import hexlet.code.BasePage
 @import hexlet.code.utils.NamedRoutes
-@import javax.naming.Name
 
 @param Content content = null
 @param Content footer = null

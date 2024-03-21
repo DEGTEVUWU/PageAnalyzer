@@ -1,10 +1,10 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
+import hexlet.code.utils.CurrentTime;
 
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -20,17 +20,16 @@ public class UrlRepository extends BaseRepository {
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            Date actualDate = new Date();
-            Timestamp createdAt = new Timestamp(actualDate.getTime());
+            var currentTime = CurrentTime.currentTime();
 
             preparedStatement.setString(1, url.getName());
-            preparedStatement.setTimestamp(2, createdAt);
+            preparedStatement.setTimestamp(2, currentTime);
             preparedStatement.executeUpdate();
             var generatedKeys = preparedStatement.getGeneratedKeys();
             // Устанавливаем ID в сохраненную сущность
             if (generatedKeys.next()) {
                 url.setId(generatedKeys.getLong(1));
-                url.setCreatedAt(createdAt);
+                url.setCreatedAt(currentTime);
             } else {
                 throw new SQLException("DB have not returned an id after saving an entity");
             }

@@ -12,8 +12,7 @@ import kong.unirest.Unirest;
 import org.jsoup.Jsoup;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
+import hexlet.code.utils.CurrentTime;
 
 public class CheckController {
     public static void check(Context ctx) throws SQLException {
@@ -30,10 +29,9 @@ public class CheckController {
             String h1 = htmlPage.getElementsByTag("h1").text();
             String title = htmlPage.getElementsByTag("title").text();
             String description = htmlPage.select("meta[name = description]").attr("content");
-            Date actualDate = new Date();
-            Timestamp createdAt = new Timestamp(actualDate.getTime());
 
-            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
+            var currentTime = CurrentTime.currentTime();
+            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, currentTime);
             try {
                 CheckRepository.saveCheck(urlCheck);
             } catch (SQLException e) {
