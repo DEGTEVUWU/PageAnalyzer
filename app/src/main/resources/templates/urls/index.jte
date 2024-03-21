@@ -10,12 +10,7 @@ page = page,
 content  = @`
     <div class="mx-auto p-4 py-md-5">
         <main>
-<%--            @if (page != null && page.getFlash() != null)--%>
-<%--                <div class="rounded-0 m-0 alert alert-dismissible fade show alert-${page.getFlashType()}" role="alert">--%>
-<%--                    <p class="m-0">${page.getFlash()}</p>--%>
-<%--                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
-<%--                </div>--%>
-<%--            @endif--%>
+
             <h2>${"Это лист со всеми добавленными сайтами!"}</h2>
             
             @if(page.getUrls().isEmpty())
