@@ -18,10 +18,8 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class UrlController {
@@ -48,16 +46,16 @@ public class UrlController {
         Url url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
 
-            if (CheckRepository.findExisting(url.getId())) {
-                List<UrlCheck> listWithChecks = new ArrayList<>();
-                listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
+        if (CheckRepository.findExisting(url.getId())) {
+            List<UrlCheck> listWithChecks = new ArrayList<>();
+            listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
 
-                UrlPage page = new UrlPage(url, listWithChecks);
-                ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-            } else {
-                UrlPage page = new UrlPage(url, null);
-                ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-            }
+            UrlPage page = new UrlPage(url, listWithChecks);
+            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+        } else {
+            UrlPage page = new UrlPage(url, null);
+            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+        }
     }
 
 

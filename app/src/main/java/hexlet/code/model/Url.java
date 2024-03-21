@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 @Setter
@@ -25,14 +24,14 @@ public class Url {
         this.name = name;
         this.createdAt = createdAt;
     }
-    public Integer getStatusCode()  {
+    public final Integer getStatusCode()  {
         if (CheckRepository.findExisting(this.id)) {
             var list = CheckRepository.find(Math.toIntExact(id));
             return list.get(list.size() - 1).getStatusCode();
         }
         return  null;
     }
-    public Timestamp getCheckCreatedAt() {
+    public final Timestamp getCheckCreatedAt() {
         if (CheckRepository.findExisting(this.id)) {
             var list = CheckRepository.find(Math.toIntExact(id));
             return list.get(list.size() - 1).getCreatedAt();

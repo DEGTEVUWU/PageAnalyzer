@@ -44,7 +44,7 @@ content  = @`
                                 <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
                             </td>
                             <td>
-                                @if(url.getCreatedAt() != null)
+                                @if(url.getCheckCreatedAt() != null)
                                 ${String.valueOf(url.getCheckCreatedAt())}
                                     @endif
                             </td>

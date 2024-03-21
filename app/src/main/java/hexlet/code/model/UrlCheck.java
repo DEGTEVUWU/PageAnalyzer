@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.sql.SQLException;
 import java.sql.Timestamp;
 
 @Setter
@@ -20,8 +19,8 @@ public class UrlCheck {
     private String description;
     private Long urlId;
     private Timestamp createdAt;
-        public UrlCheck(Long id, Integer statusCode, String title, String h1, String description, Long urlId) {
-            this.id = id;
+    public UrlCheck(Long id, Integer statusCode, String title, String h1, String description, Long urlId) {
+        this.id = id;
         this.statusCode = statusCode;
         this.title = title;
         this.h1 = h1;

@@ -1,6 +1,5 @@
 package hexlet.code.repository;
 
-import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
 
 import java.sql.SQLException;
@@ -9,12 +8,11 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
 public class CheckRepository extends BaseRepository {
     public static void saveCheck(UrlCheck urlCheck) throws SQLException {
-        String sql = "INSERT INTO url_checks (url_id, status_code, title, h1, description, created_at) " +
-                "VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO url_checks (url_id, status_code, title, h1, description, created_at) "
+                + "VALUES (?, ?, ?, ?, ?, ?)";
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
@@ -92,7 +90,7 @@ public class CheckRepository extends BaseRepository {
             var resultSet = stmt.executeQuery();
             return resultSet.next();
         } catch (SQLException e) {
-        throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 }

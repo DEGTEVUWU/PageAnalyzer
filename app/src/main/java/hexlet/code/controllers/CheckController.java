@@ -1,6 +1,5 @@
 package hexlet.code.controllers;
 
-import hexlet.code.dto.UrlPage;
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.CheckRepository;
 import hexlet.code.repository.UrlRepository;
@@ -14,10 +13,7 @@ import org.jsoup.Jsoup;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 public class CheckController {
     public static void check(Context ctx) throws SQLException {
