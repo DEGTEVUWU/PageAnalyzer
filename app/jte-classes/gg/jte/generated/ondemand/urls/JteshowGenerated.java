@@ -4,12 +4,12 @@ import hexlet.code.utils.FormattedTime;
 import hexlet.code.utils.NamedRoutes;
 public final class JteshowGenerated {
 	public static final String JTE_NAME = "urls/show.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,6,6,11,11,14,14,14,21,21,21,29,29,29,37,37,37,44,44,44,44,44,44,44,44,48,48,72,72,76,76,76,79,79,79,82,82,82,85,85,85,88,88,88,91,91,91,95,95,97,97,99,99,99,99,102,102,102,106,106,106};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,6,6,11,11,15,15,15,22,22,22,30,30,30,38,38,38,45,45,45,45,45,45,45,45,49,49,73,73,77,77,77,80,80,80,83,83,83,86,86,86,89,89,89,92,92,92,96,96,98,98,102,102,102,102,105,105,105,109,109,109};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, UrlPage page) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\r\n    <main>\r\n\r\n        <h1>Сайт: ");
+				jteOutput.writeContent("\r\n    <body class=\"d-flex flex-column min-vh-100\">\r\n    <main class=\"flex-grow-1\">\r\n        <div class=\"mx-auto p-4 py-md-5\">\r\n        <h1>Сайт: ");
 				jteOutput.setContext("h1", null);
 				jteOutput.writeUserContent(page.getUrl().getName());
 				jteOutput.writeContent("</h1>\r\n        <table class=\"table table-bordered table-hover mt-3\">\r\n            <tr>\r\n                <td>\r\n                    ID\r\n                </td>\r\n                <td>\r\n                    ");
@@ -55,7 +55,7 @@ public final class JteshowGenerated {
 					}
 					jteOutput.writeContent("\r\n        </table>\r\n        ");
 				}
-				jteOutput.writeContent("\r\n    </main>\r\n");
+				jteOutput.writeContent("\r\n        </div>\r\n    </main>\r\n    </body>\r\n");
 			}
 		}, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {

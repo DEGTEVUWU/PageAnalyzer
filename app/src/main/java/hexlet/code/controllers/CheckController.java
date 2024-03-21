@@ -7,7 +7,6 @@ import hexlet.code.utils.NamedRoutes;
 import io.javalin.http.Context;
 import io.javalin.http.InternalServerErrorResponse;
 import io.javalin.http.NotFoundResponse;
-import io.javalin.validation.ValidationException;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
 import org.jsoup.Jsoup;
