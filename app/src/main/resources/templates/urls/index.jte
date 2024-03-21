@@ -1,7 +1,6 @@
 @import hexlet.code.dto.UrlsPage
-@import hexlet.code.model.UrlCheck
 @import hexlet.code.utils.NamedRoutes
-
+@import hexlet.code.utils.FormattedTime
 @param UrlsPage page
 
 
@@ -45,7 +44,7 @@ content  = @`
                             </td>
                             <td>
                                 @if(url.getCheckCreatedAt() != null)
-                                ${String.valueOf(url.getCheckCreatedAt())}
+                                    ${FormattedTime.formattedTime(url.getCreatedAt())}
                                     @endif
                             </td>
                             <td>

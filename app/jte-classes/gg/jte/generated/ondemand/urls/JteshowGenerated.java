@@ -1,9 +1,10 @@
 package gg.jte.generated.ondemand.urls;
 import hexlet.code.dto.UrlPage;
+import hexlet.code.utils.FormattedTime;
 import hexlet.code.utils.NamedRoutes;
 public final class JteshowGenerated {
 	public static final String JTE_NAME = "urls/show.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,5,5,10,10,13,13,13,20,20,20,28,28,28,36,36,36,43,43,43,43,43,43,43,43,47,47,71,71,75,75,75,78,78,78,81,81,81,84,84,84,87,87,87,90,90,90,94,94,96,96,98,98,98,98,101,101,101,105,105,105};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,6,6,11,11,14,14,14,21,21,21,29,29,29,37,37,37,44,44,44,44,44,44,44,44,48,48,72,72,76,76,76,79,79,79,82,82,82,85,85,85,88,88,88,91,91,91,95,95,97,97,99,99,99,99,102,102,102,106,106,106};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, UrlPage page) {
 		jteOutput.writeContent("\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
@@ -19,7 +20,7 @@ public final class JteshowGenerated {
 				jteOutput.writeUserContent(page.getUrl().getName());
 				jteOutput.writeContent("\r\n                </td>\r\n            </tr>\r\n            <tr>\r\n                <td>\r\n                    Дата создания\r\n                </td>\r\n                <td>\r\n                    ");
 				jteOutput.setContext("td", null);
-				jteOutput.writeUserContent(String.valueOf(page.getUrl().getCreatedAt()));
+				jteOutput.writeUserContent(FormattedTime.formattedTime(page.getUrl().getCreatedAt()));
 				jteOutput.writeContent("\r\n                </td>\r\n            </tr>\r\n        </table>\r\n<br>\r\n        <h2>Проверки</h2>\r\n\r\n        <form");
 				if (gg.jte.runtime.TemplateUtils.isAttributeRendered(NamedRoutes.urlPath(page.getUrl().getId()))) {
 					jteOutput.writeContent(" action=\"");
@@ -49,7 +50,7 @@ public final class JteshowGenerated {
 						jteOutput.writeUserContent(singlePage.getDescription());
 						jteOutput.writeContent("\r\n                </td>\r\n                <td>\r\n                    ");
 						jteOutput.setContext("td", null);
-						jteOutput.writeUserContent(String.valueOf(singlePage.getCreatedAt()));
+						jteOutput.writeUserContent(FormattedTime.formattedTime(singlePage.getCreatedAt()));
 						jteOutput.writeContent("\r\n                </td>\r\n            </tr>\r\n            </tbody>\r\n                ");
 					}
 					jteOutput.writeContent("\r\n        </table>\r\n        ");

@@ -1,4 +1,5 @@
 @import hexlet.code.dto.UrlPage
+@import hexlet.code.utils.FormattedTime
 @import hexlet.code.utils.NamedRoutes
 
 @param UrlPage page
@@ -31,7 +32,7 @@ content  = @`
                     Дата создания
                 </td>
                 <td>
-                    ${String.valueOf(page.getUrl().getCreatedAt())}
+                    ${FormattedTime.formattedTime(page.getUrl().getCreatedAt())}
                 </td>
             </tr>
         </table>
@@ -85,7 +86,7 @@ content  = @`
                     ${singlePage.getDescription()}
                 </td>
                 <td>
-                    ${String.valueOf(singlePage.getCreatedAt())}
+                    ${FormattedTime.formattedTime(singlePage.getCreatedAt())}
                 </td>
             </tr>
             </tbody>
