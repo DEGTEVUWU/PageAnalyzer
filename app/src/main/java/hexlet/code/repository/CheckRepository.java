@@ -37,27 +37,27 @@ public class CheckRepository extends BaseRepository {
             }
         }
     }
-    public static List<UrlCheck> getEntities() throws SQLException {
-        var sql = "SELECT * FROM url_checks";
-        try (var conn = dataSource.getConnection();
-             var stmt = conn.prepareStatement(sql)) {
-            var resultSet = stmt.executeQuery();
-            var result = new ArrayList<UrlCheck>();
-            while (resultSet.next()) {
-                var id = resultSet.getLong("id");
-                Long urlId = Long.valueOf(resultSet.getInt("url_id"));
-                var statusCode = resultSet.getInt("status_code");
-                var title = resultSet.getString("title");
-                var h1 = resultSet.getString("h1");
-                var description = resultSet.getString("description");
-
-                UrlCheck urlCheck = new UrlCheck(id, statusCode, title, h1, description, urlId);
-                urlCheck.setCreatedAt(resultSet.getTimestamp("created_at"));
-                result.add(urlCheck);
-            }
-            return result;
-        }
-    }
+//    public static List<UrlCheck> getEntities() throws SQLException {
+//        var sql = "SELECT * FROM url_checks";
+//        try (var conn = dataSource.getConnection();
+//             var stmt = conn.prepareStatement(sql)) {
+//            var resultSet = stmt.executeQuery();
+//            var result = new ArrayList<UrlCheck>();
+//            while (resultSet.next()) {
+//                var id = resultSet.getLong("id");
+//                Long urlId = Long.valueOf(resultSet.getInt("url_id"));
+//                var statusCode = resultSet.getInt("status_code");
+//                var title = resultSet.getString("title");
+//                var h1 = resultSet.getString("h1");
+//                var description = resultSet.getString("description");
+//
+//                UrlCheck urlCheck = new UrlCheck(id, statusCode, title, h1, description, urlId);
+//                urlCheck.setCreatedAt(resultSet.getTimestamp("created_at"));
+//                result.add(urlCheck);
+//            }
+//            return result;
+//        }
+//    }
     public static List<UrlCheck> find(Integer inputUrlId) {
         var sql = "SELECT * FROM url_checks WHERE url_id = ?";
         try (var conn = dataSource.getConnection();
