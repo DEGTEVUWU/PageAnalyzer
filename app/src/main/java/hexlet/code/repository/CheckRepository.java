@@ -60,7 +60,7 @@ public class CheckRepository extends BaseRepository {
             return result;
         }
     }
-    public static List<UrlCheck> find(Integer inputUrlId) throws SQLException {
+    public static List<UrlCheck> find(Integer inputUrlId) {
         var sql = "SELECT * FROM url_checks WHERE url_id = ?";
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
@@ -80,15 +80,19 @@ public class CheckRepository extends BaseRepository {
                 result.add(urlCheck);
             }
             return result;
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
     }
-    public static boolean findExisting(Long urlId) throws SQLException {
+    public static boolean findExisting(Long urlId) {
         var sql = "SELECT * FROM url_checks WHERE url_id = ?";
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, Math.toIntExact(urlId));
             var resultSet = stmt.executeQuery();
             return resultSet.next();
+        } catch (SQLException e) {
+        throw new RuntimeException(e);
         }
     }
 }

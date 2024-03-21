@@ -1,4 +1,5 @@
 @import hexlet.code.dto.UrlsPage
+@import hexlet.code.model.UrlCheck
 @import hexlet.code.utils.NamedRoutes
 
 @param UrlsPage page
@@ -9,6 +10,12 @@ page = page,
 content  = @`
     <div class="mx-auto p-4 py-md-5">
         <main>
+<%--            @if (page != null && page.getFlash() != null)--%>
+<%--                <div class="rounded-0 m-0 alert alert-dismissible fade show alert-${page.getFlashType()}" role="alert">--%>
+<%--                    <p class="m-0">${page.getFlash()}</p>--%>
+<%--                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
+<%--                </div>--%>
+<%--            @endif--%>
             <h2>${"Это лист со всеми добавленными сайтами!"}</h2>
             
             @if(page.getUrls().isEmpty())
@@ -42,11 +49,14 @@ content  = @`
                                 <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
                             </td>
                             <td>
+                                @if(url.getCreatedAt() != null)
                                 ${String.valueOf(url.getCreatedAt())}
+                                    @endif
                             </td>
                             <td>
-                                Eee!
-<%--                                тут код ответа будет--%>
+                                @if(url.getStatusCode() != null)
+                                    ${url.getStatusCode()}
+                                    @endif
                             </td>
                         </tr>
                         </tbody>

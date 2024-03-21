@@ -30,8 +30,9 @@ public class UrlController {
     }
     public static void index(Context ctx) throws SQLException {
         List<Url> urls = UrlRepository.getEntities();
-
+//        List<UrlCheck> urlChecks = CheckRepository.getEntities();
         UrlsPage page = new UrlsPage(urls);
+//        UrlCheck urlCheck = new UrlCheck(urlChecks);
 
         //вывод флеш сообщений о (не)добавлении сайта
         page.setFlash(ctx.consumeSessionAttribute("flash"));
@@ -45,17 +46,16 @@ public class UrlController {
         Url url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
 
-        if (CheckRepository.findExisting(url.getId())) {
-            List<UrlCheck> listWithChecks = new ArrayList<>();
-            listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
-            UrlPage page = new UrlPage(url, listWithChecks);
-            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-        } else {
-            UrlPage page = new UrlPage(url, null);
-            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-        }
-//        UrlPage page = new UrlPage(url, null);
-//        ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+            if (CheckRepository.findExisting(url.getId())) {
+                List<UrlCheck> listWithChecks = new ArrayList<>();
+                listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
+
+                UrlPage page = new UrlPage(url, listWithChecks);
+                ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+            } else {
+                UrlPage page = new UrlPage(url, null);
+                ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+            }
     }
 
 

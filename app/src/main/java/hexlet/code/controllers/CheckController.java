@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 
 public class CheckController {
-//    public static List<UrlCheck> list = new ArrayList<>();
     public static void check(Context ctx) throws SQLException {
         List<UrlCheck> list = new ArrayList<>();
         var urlId = ctx.pathParamAsClass("id", Long.class).get();
@@ -35,13 +34,10 @@ public class CheckController {
             var htmlPage = Jsoup.parse(body);
             String h1 = htmlPage.getElementsByTag("h1").text();
             String title = htmlPage.getElementsByTag("title").text();
-//            String h1  = htmlPage.select("meta[name = h1]").attr("content");
-//            String title = htmlPage.select("meta[name = title]").attr("content");
             String description = htmlPage.select("meta[name = description]").attr("content");
             Date actualDate = new Date();
             Timestamp createdAt = new Timestamp(actualDate.getTime());
 
-//            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
             UrlCheck urlCheck = new UrlCheck();
             urlCheck.setStatusCode(statusCode);
             urlCheck.setTitle(title);
@@ -54,27 +50,14 @@ public class CheckController {
             } catch (SQLException e) {
                 throw new InternalServerErrorResponse();
             }
+
             ctx.sessionAttribute("flash", "Страница успешно проверена");
             ctx.sessionAttribute("flashType", "success");
-            list.add(urlCheck);
-            if (CheckRepository.findExisting(url.getId())) {
-                List<UrlCheck> allChecks = new ArrayList<>();
-                allChecks = CheckRepository.find(Math.toIntExact(url.getId()));
-//                list.addAll(allChecks);
-                UrlPage page = new UrlPage(url, allChecks);
-                ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-
-            } else {
-                UrlPage page = new UrlPage(url, list);
-                ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-
-            }
-
-
-//            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
         } catch (ValidationException e) {
             ctx.sessionAttribute("flash", "Некорректный адрес");
             ctx.sessionAttribute("flashType", "danger");
         }
+
+        ctx.redirect(NamedRoutes.urlPath(url.getId()));
     }
 }

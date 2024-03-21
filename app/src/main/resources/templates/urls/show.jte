@@ -7,6 +7,12 @@
     page = page,
 content  = @`
     <main>
+<%--        @if (page != null && page.getFlash() != null)--%>
+<%--            <div class="rounded-0 m-0 alert alert-dismissible fade show alert-${page.getFlashType()}" role="alert">--%>
+<%--                <p class="m-0">${page.getFlash()}</p>--%>
+<%--                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>--%>
+<%--            </div>--%>
+<%--        @endif--%>
         <h1>Сайт: ${page.getUrl().getName()}</h1>
         <table class="table table-bordered table-hover mt-3">
             <tr>
@@ -30,7 +36,9 @@ content  = @`
                     Дата создания
                 </td>
                 <td>
+                    @if(page.getUrl().getCreatedAt() != null)
                     ${String.valueOf(page.getUrl().getCreatedAt())}
+                        @endif
                 </td>
             </tr>
         </table>

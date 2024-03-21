@@ -1,14 +1,21 @@
 package gg.jte.generated.ondemand.urls;
 import hexlet.code.dto.UrlsPage;
+import hexlet.code.model.UrlCheck;
 import hexlet.code.utils.NamedRoutes;
 public final class JteindexGenerated {
 	public static final String JTE_NAME = "urls/index.jte";
-	public static final int[] JTE_LINE_INFO = {0,0,1,3,3,3,6,6,11,11,14,14,14,16,16,18,18,37,37,41,41,41,44,44,44,44,44,44,44,44,44,44,44,47,47,47,51,55,55,57,57,62,62,62,62,68,68,68};
+	public static final int[] JTE_LINE_INFO = {0,0,1,2,4,4,4,7,7,12,12,15,16,17,18,19,20,21,21,21,23,23,25,25,44,44,48,48,48,51,51,51,51,51,51,51,51,51,51,51,54,54,55,55,55,56,56,59,59,60,60,60,61,61,65,65,67,67,72,72,72,72,78,78,78};
 	public static void render(gg.jte.html.HtmlTemplateOutput jteOutput, gg.jte.html.HtmlInterceptor jteHtmlInterceptor, UrlsPage page) {
 		jteOutput.writeContent("\r\n\r\n");
 		gg.jte.generated.ondemand.layout.JtepageGenerated.render(jteOutput, jteHtmlInterceptor, new gg.jte.html.HtmlContent() {
 			public void writeTo(gg.jte.html.HtmlTemplateOutput jteOutput) {
-				jteOutput.writeContent("\r\n    <div class=\"mx-auto p-4 py-md-5\">\r\n        <main>\r\n            <h2>");
+				jteOutput.writeContent("\r\n    <div class=\"mx-auto p-4 py-md-5\">\r\n        <main>\r\n");
+				jteOutput.writeContent("\r\n");
+				jteOutput.writeContent("\r\n");
+				jteOutput.writeContent("\r\n");
+				jteOutput.writeContent("\r\n");
+				jteOutput.writeContent("\r\n");
+				jteOutput.writeContent("\r\n            <h2>");
 				jteOutput.setContext("h2", null);
 				jteOutput.writeUserContent("Это лист со всеми добавленными сайтами!");
 				jteOutput.writeContent("</h2>\r\n            \r\n            ");
@@ -32,9 +39,19 @@ public final class JteindexGenerated {
 						jteOutput.setContext("a", null);
 						jteOutput.writeUserContent(url.getName());
 						jteOutput.writeContent(" </a>\r\n                            </td>\r\n                            <td>\r\n                                ");
-						jteOutput.setContext("td", null);
-						jteOutput.writeUserContent(String.valueOf(url.getCreatedAt()));
-						jteOutput.writeContent("\r\n                            </td>\r\n                            <td>\r\n                                Eee!\r\n");
+						if (url.getCreatedAt() != null) {
+							jteOutput.writeContent("\r\n                                ");
+							jteOutput.setContext("td", null);
+							jteOutput.writeUserContent(String.valueOf(url.getCreatedAt()));
+							jteOutput.writeContent("\r\n                                    ");
+						}
+						jteOutput.writeContent("\r\n                            </td>\r\n                            <td>\r\n                                ");
+						if (url.getStatusCode() != null) {
+							jteOutput.writeContent("\r\n                                    ");
+							jteOutput.setContext("td", null);
+							jteOutput.writeUserContent(url.getStatusCode());
+							jteOutput.writeContent("\r\n                                    ");
+						}
 						jteOutput.writeContent("\r\n                            </td>\r\n                        </tr>\r\n                        </tbody>\r\n                    ");
 					}
 					jteOutput.writeContent("\r\n                </table>\r\n            ");
