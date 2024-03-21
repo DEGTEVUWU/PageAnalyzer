@@ -18,8 +18,10 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 public class UrlController {
@@ -84,6 +86,8 @@ public class UrlController {
             } else {
                 //добавить в объект класса урл приведённую к нужному виду ссыль-имя сайта,
                 // с кем мы работаем, записать в бд
+//                Date actualDate = new Date();
+//                Timestamp createdAt = new Timestamp(actualDate.getTime());
                 Url resultUrl = new Url(name);
                 UrlRepository.save(resultUrl);
 

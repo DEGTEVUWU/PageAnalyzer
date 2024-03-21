@@ -31,9 +31,7 @@ content  = @`
                     Дата создания
                 </td>
                 <td>
-                    @if(page.getUrl().getCreatedAt() != null)
                     ${String.valueOf(page.getUrl().getCreatedAt())}
-                        @endif
                 </td>
             </tr>
         </table>

@@ -45,7 +45,7 @@ content  = @`
                             </td>
                             <td>
                                 @if(url.getCreatedAt() != null)
-                                ${String.valueOf(url.getCreatedAt())}
+                                ${String.valueOf(url.getCheckCreatedAt())}
                                     @endif
                             </td>
                             <td>

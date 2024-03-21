@@ -21,7 +21,7 @@ import java.util.List;
 
 public class CheckController {
     public static void check(Context ctx) throws SQLException {
-        List<UrlCheck> list = new ArrayList<>();
+//        List<UrlCheck> list = new ArrayList<>();
         var urlId = ctx.pathParamAsClass("id", Long.class).get();
         var url = UrlRepository.find(urlId)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id " + urlId + " not found"));

@@ -32,7 +32,7 @@ public class Url {
         }
         return  null;
     }
-    public Timestamp getCreatedAt() {
+    public Timestamp getCheckCreatedAt() {
         if (CheckRepository.findExisting(this.id)) {
             var list = CheckRepository.find(Math.toIntExact(id));
             return list.get(list.size() - 1).getCreatedAt();
