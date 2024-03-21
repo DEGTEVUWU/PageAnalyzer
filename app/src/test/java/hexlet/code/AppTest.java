@@ -85,12 +85,32 @@ public class AppTest {
             assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
         }));
     }
+    @Test
+    public void testSomeUrlCheck() throws SQLException {
+        Date actualDate = new Date();
+        Timestamp createdAt = new Timestamp(actualDate.getTime());
+        Url url = new Url("https://github.com", createdAt);
+        UrlRepository.save(url);
+        //создали тестовый объект и закинули в БД
+
+        JavalinTest.test(app, ((server, client) -> {
+            var requestBody = "url=https://github.com";
+            var response = client.post(NamedRoutes.urlPath(url.getId()), requestBody);
+            assertThat(response.code()).isEqualTo(200);
+            assertThat(response.body().string()).contains("github.com");
+            assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
+            assertThat(CheckRepository.findExisting(url.getId())).isTrue();
+            assertThat(CheckRepository.find(Math.toIntExact(url.getId())).get(0).getTitle())
+                    .isEqualTo("GitHub: Let’s build from here · GitHub");
+        }));
+    }
 
     @Test
     void testUrlNotFound() {
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/url/999999");
             assertThat(response.code()).isEqualTo(404);
+
         });
     }
     @Test

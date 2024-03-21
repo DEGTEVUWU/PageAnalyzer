@@ -36,25 +36,6 @@ public class UrlRepository extends BaseRepository {
             }
         }
     }
-//public static void save(Url url) throws SQLException {
-//    var sql = "INSERT INTO urls(name, created_at) VALUES (?,?)";
-//    try (var conn = dataSource.getConnection();
-//         var stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-//        stmt.setString(1, url.getName());
-//        var date = new Date();
-//        var createdAt = new Timestamp(date.getTime());
-//        stmt.setTimestamp(2, createdAt);
-//        stmt.executeUpdate();
-//        var generatedKeys = stmt.getGeneratedKeys();
-//        if (generatedKeys.next()) {
-//            url.setId(generatedKeys.getLong(1));
-//            url.setCreatedAt(createdAt);
-//        } else {
-//            throw new SQLException("DB have not returned ID after saving an entity");
-//        }
-//    }
-//}
-
 
     public static Optional<Url> find(Long id) throws SQLException {
         var sql = "SELECT * FROM urls WHERE id = ?";
@@ -64,7 +45,6 @@ public class UrlRepository extends BaseRepository {
             var resultSet = stmt.executeQuery();
             if (resultSet.next()) {
                 var name = resultSet.getString("name");
-//                Timestamp created_at = Timestamp.valueOf(resultSet.getString("created_at"));
                 Url url = new Url(name);
                 url.setId(id);
                 url.setCreatedAt(resultSet.getTimestamp("created_at"));

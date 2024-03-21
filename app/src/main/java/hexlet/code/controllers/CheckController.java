@@ -17,7 +17,6 @@ import java.util.Date;
 
 public class CheckController {
     public static void check(Context ctx) throws SQLException {
-//        List<UrlCheck> list = new ArrayList<>();
         var urlId = ctx.pathParamAsClass("id", Long.class).get();
         var url = UrlRepository.find(urlId)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id " + urlId + " not found"));
@@ -34,13 +33,7 @@ public class CheckController {
             Date actualDate = new Date();
             Timestamp createdAt = new Timestamp(actualDate.getTime());
 
-            UrlCheck urlCheck = new UrlCheck();
-            urlCheck.setStatusCode(statusCode);
-            urlCheck.setTitle(title);
-            urlCheck.setH1(h1);
-            urlCheck.setDescription(description);
-            urlCheck.setUrlId(urlId);
-            urlCheck.setCreatedAt(createdAt);
+            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, createdAt);
             try {
                 CheckRepository.saveCheck(urlCheck);
             } catch (SQLException e) {
