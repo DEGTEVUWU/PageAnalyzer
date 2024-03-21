@@ -77,7 +77,7 @@ public class UrlController {
                 ctx.redirect(NamedRoutes.urlsPath());
             } else {
 
-                Url resultUrl = new Url(name); //добавить в объект класса урл приведённую к нужному виду ссыль-имя сайта, с кем мы работаем, записать в бд
+                Url resultUrl = new Url(name); //добавить в объект класса урл приведённую к нужному виду имя сайта
                 UrlRepository.save(resultUrl);
                 ctx.sessionAttribute("flash", "Страница успешно добавлена");
                 ctx.sessionAttribute("flashType", "success");
