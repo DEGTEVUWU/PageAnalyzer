@@ -39,15 +39,23 @@ public class AppTest {
             var response = client.get("/");
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string().contains("Проверка сайтов на SEO-пригодность"));
+            response.close();
         }));
     }
 
     @Test
     public void testUrlsPage() {
         JavalinTest.test(app, ((server, client) -> {
-            var response = client.get("/urls");
+            var request = "url=https://github.com";
+            client.post(NamedRoutes.urlsPath(), request);
+            var response = client.get(NamedRoutes.urlsPath());
+
+            var responseBody = response.body().toString();
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string().contains("Это лист со всеми добавленными сайтами!"));
+            assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
+            assertThat(responseBody.contains("github.com"));
+            response.close();
         }));
     }
 
@@ -55,7 +63,7 @@ public class AppTest {
     public void testSomeUrlPage() throws SQLException {
         Date actualDate = new Date();
         Timestamp createdAt = new Timestamp(actualDate.getTime());
-        Url url = new Url("https://github.com/", createdAt);
+        Url url = new Url("https://github.com", createdAt);
         UrlRepository.save(url);
         //создали тестовый объект и закинули в БД
 
@@ -63,6 +71,18 @@ public class AppTest {
             var response = client.get("/url/" + url.getId());
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string().contains("github.com"));
+            assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
+            response.close();
+        }));
+    }
+    @Test
+    public void testSomeUrlCreate() {
+        JavalinTest.test(app, ((server, client) -> {
+            var requestBody = "url=https://github.com";
+            var response = client.post(NamedRoutes.urlsPath(), requestBody);
+            assertThat(response.code()).isEqualTo(200);
+            assertThat(response.body().string()).contains("github.com");
+            assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
         }));
     }
 
