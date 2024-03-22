@@ -68,7 +68,7 @@ public class AppTest {
         //создали тестовый объект и закинули в БД
 
         JavalinTest.test(app, ((server, client) -> {
-            var response = client.get("/url/" + url.getId());
+            var response = client.get("/urls/" + url.getId());
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string().contains("github.com"));
             assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
@@ -108,7 +108,7 @@ public class AppTest {
     @Test
     void testUrlNotFound() {
         JavalinTest.test(app, (server, client) -> {
-            var response = client.get("/url/999999");
+            var response = client.get("/urls/999999");
             assertThat(response.code()).isEqualTo(404);
 
         });
