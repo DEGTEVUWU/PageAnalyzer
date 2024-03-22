@@ -22,10 +22,10 @@ public final class JteshowGenerated {
 				jteOutput.setContext("td", null);
 				jteOutput.writeUserContent(FormattedTime.formattedTime(page.getUrl().getCreatedAt()));
 				jteOutput.writeContent("\r\n                </td>\r\n            </tr>\r\n        </table>\r\n<br>\r\n        <h2>Проверки</h2>\r\n\r\n        <form");
-				if (gg.jte.runtime.TemplateUtils.isAttributeRendered(NamedRoutes.urlPath(page.getUrl().getId()))) {
+				if (gg.jte.runtime.TemplateUtils.isAttributeRendered(NamedRoutes.checkPath(page.getUrl().getId()))) {
 					jteOutput.writeContent(" action=\"");
 					jteOutput.setContext("form", "action");
-					jteOutput.writeUserContent(NamedRoutes.urlPath(page.getUrl().getId()));
+					jteOutput.writeUserContent(NamedRoutes.checkPath(page.getUrl().getId()));
 					jteOutput.setContext("form", null);
 					jteOutput.writeContent("\"");
 				}

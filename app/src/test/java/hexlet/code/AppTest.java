@@ -32,7 +32,6 @@ public class AppTest {
     }
 
 
-
     @Test
     public void testMainPage() {
         JavalinTest.test(app, ((server, client) -> {
@@ -95,7 +94,7 @@ public class AppTest {
 
         JavalinTest.test(app, ((server, client) -> {
             var requestBody = "url=https://github.com";
-            var response = client.post(NamedRoutes.urlPath(url.getId()), requestBody);
+            var response = client.post(NamedRoutes.checkPath(url.getId()), requestBody);
             assertThat(response.code()).isEqualTo(200);
             assertThat(response.body().string()).contains("github.com");
             assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
@@ -126,10 +125,10 @@ public class AppTest {
             Url url  = new Url(testUrl);
             UrlRepository.save(url); //сохранил урлу в репо
             Long id = url.getId(); //взять айди у урлы
-            client.post(NamedRoutes.urlPath(id)); //делать пост-запрос на проверку по указанной айди(которая ведёт к
-            // фейл-мок серву с заготовленным ответом(данными) по нужным категориям
+            client.post(NamedRoutes.checkPath(id)); //делать пост-запрос на проверку по указанной айди(которая ведёт к
+            // фейк-мок серву с заготовленным ответом(данными) по нужным категориям
             var checkUrl = CheckRepository.find(Math.toIntExact(url.getId())).get(0); //взял из репо с проверками лист
-            // с проыверками, принадлежащими сущности по указанному айди
+            // с проверками, принадлежащими сущности по указанному айди
             assertThat(checkUrl.getTitle()).isEqualTo("GitHub: Let’s build from here · GitHub");
             assertThat(checkUrl.getH1()).isEqualTo("Search code, repositories, users, issues, pull requests...");
             assertThat(checkUrl.getDescription()).isEqualTo("Some description from GitHub, but small and fake");

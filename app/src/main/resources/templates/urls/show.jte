@@ -40,7 +40,7 @@ content  = @`
 <br>
         <h2>Проверки</h2>
 
-        <form action="${NamedRoutes.urlPath(page.getUrl().getId())}" method="post">
+        <form action="${NamedRoutes.checkPath(page.getUrl().getId())}" method="post">
             <button type="submit" class="btn btn-primary">Проверить</button>
         </form>
 

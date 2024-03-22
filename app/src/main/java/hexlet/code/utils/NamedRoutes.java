@@ -19,4 +19,15 @@ public class NamedRoutes {
         return "/urls/" + id;
     }
 
+
+    //маршрут для пост-запроса по проверке сайта(урла)
+    public static String checkPath(Long id) {
+        return checkPath(String.valueOf(id));
+    }
+
+    //маршрут для пост-запроса по проверке сайта(урла)
+    public static String checkPath(String id) {
+        return "/urls/" + id + "/checks";
+    }
+
 }
