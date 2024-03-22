@@ -65,7 +65,7 @@ public class App {
     }
     public static String getDataBaseUrl() {
         String url = System.getenv().getOrDefault("JDBC_DATABASE_URL",
-                "jdbc:h2:mem:hexlet_project;DB_CLOSE_DELAY=-1;");
+                "jdbc:h2:mem:project");
         return url;
     }
 
