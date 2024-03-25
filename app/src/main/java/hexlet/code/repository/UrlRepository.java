@@ -2,8 +2,6 @@ package hexlet.code.repository;
 
 import hexlet.code.model.Url;
 import hexlet.code.utils.FormattedTime;
-import hexlet.code.utils.NamedRoutes;
-import io.javalin.http.Context;
 
 import java.sql.SQLException;
 import java.sql.Statement;

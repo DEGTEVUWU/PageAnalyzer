@@ -16,7 +16,6 @@ import org.apache.commons.validator.routines.UrlValidator;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -44,11 +43,11 @@ public class UrlController {
 
         List<UrlCheck> listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
 
-            UrlPage page = new UrlPage(url, listWithChecks);
-            page.setFlash(ctx.consumeSessionAttribute("flash"));
-            page.setFlashType(ctx.consumeSessionAttribute("flashType"));
+        UrlPage page = new UrlPage(url, listWithChecks);
+        page.setFlash(ctx.consumeSessionAttribute("flash"));
+        page.setFlashType(ctx.consumeSessionAttribute("flashType"));
 
-            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
+        ctx.render("urls/show.jte", Collections.singletonMap("page", page));
     }
 
 
@@ -63,29 +62,26 @@ public class UrlController {
             ctx.status(422).render("index.jte", Collections.singletonMap("page", page));
         }
 
-            if (!validateUrl(nameUrl)) {
-                ctx.sessionAttribute("flash", "Некорректный URL");
-                ctx.sessionAttribute("flashType", "danger");
-                var page = new BuildUrlPage();
-                page.setFlash(ctx.consumeSessionAttribute("flash"));
-                page.setFlashType(ctx.consumeSessionAttribute("flashType"));
-                ctx.render("index.jte", Collections.singletonMap("page", page));
-                return;
-            }
-            if (UrlRepository.findExisting(nameUrl)) {
-                ctx.sessionAttribute("flash", "Страница уже существует");
-                ctx.sessionAttribute("flashType", "info");
-                ctx.redirect(NamedRoutes.urlsPath());
-            } else {
-
-                Url resultUrl = new Url(nameUrl); //добавить в объект класса урл приведённую к нужному виду имя сайта
-                UrlRepository.save(resultUrl);
-                ctx.sessionAttribute("flash", "Страница успешно добавлена");
-                ctx.sessionAttribute("flashType", "success");
-                ctx.redirect(NamedRoutes.urlsPath());
-            }
-
-
+        if (!validateUrl(nameUrl)) {
+            ctx.sessionAttribute("flash", "Некорректный URL");
+            ctx.sessionAttribute("flashType", "danger");
+            var page = new BuildUrlPage();
+            page.setFlash(ctx.consumeSessionAttribute("flash"));
+            page.setFlashType(ctx.consumeSessionAttribute("flashType"));
+            ctx.render("index.jte", Collections.singletonMap("page", page));
+            return;
+        }
+        if (UrlRepository.findExisting(nameUrl)) {
+            ctx.sessionAttribute("flash", "Страница уже существует");
+            ctx.sessionAttribute("flashType", "info");
+            ctx.redirect(NamedRoutes.urlsPath());
+        } else {
+            Url resultUrl = new Url(nameUrl); //добавить в объект класса урл приведённую к нужному виду имя сайта
+            UrlRepository.save(resultUrl);
+            ctx.sessionAttribute("flash", "Страница успешно добавлена");
+            ctx.sessionAttribute("flashType", "success");
+            ctx.redirect(NamedRoutes.urlsPath());
+        }
     }
     public static boolean validateUrl(String url) {
         String[] schemas = {"http", "https"};
@@ -97,5 +93,4 @@ public class UrlController {
         UrlRepository.delete(id);
         ctx.redirect(NamedRoutes.urlsPath());
     }
-
 }
