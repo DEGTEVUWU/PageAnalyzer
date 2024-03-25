@@ -84,11 +84,10 @@ public class UrlRepository extends BaseRepository {
         var sql = "DELETE FROM urls WHERE id = ?";
         try (var conn = dataSource.getConnection();
              var stmt = conn.prepareStatement(sql)) {
-
             stmt.setLong(1, id);
             stmt.executeUpdate();
-            } catch (SQLException e){
-                e.printStackTrace();
+        } catch (SQLException e){
+            e.printStackTrace();
         }
     }
 }
