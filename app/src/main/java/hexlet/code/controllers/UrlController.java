@@ -42,29 +42,28 @@ public class UrlController {
         Url url = UrlRepository.find(id)
                 .orElseThrow(() -> new NotFoundResponse("Entity with id = " + id + " not found"));
 
-        if (CheckRepository.findExisting(url.getId())) {
-            List<UrlCheck> listWithChecks = new ArrayList<>();
-            listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
+        List<UrlCheck> listWithChecks = CheckRepository.find(Math.toIntExact(url.getId()));
 
             UrlPage page = new UrlPage(url, listWithChecks);
             page.setFlash(ctx.consumeSessionAttribute("flash"));
             page.setFlashType(ctx.consumeSessionAttribute("flashType"));
+
             ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-        } else {
-            UrlPage page = new UrlPage(url, null);
-            ctx.render("urls/show.jte", Collections.singletonMap("page", page));
-        }
     }
 
 
     public static void create(Context ctx) throws SQLException, URISyntaxException {
         var beginnerUrl = ctx.formParam("url");
-
+        String nameUrl = null;
         try {
             var uri = new URI(beginnerUrl);
-            String name = uri.getScheme() + "://" + uri.getAuthority();
+            nameUrl = uri.getScheme() + "://" + uri.getAuthority();
+        } catch (ValidationException e) {
+            var page = new BuildUrlPage(beginnerUrl, e.getErrors());
+            ctx.status(422).render("index.jte", Collections.singletonMap("page", page));
+        }
 
-            if (!validateUrl(name)) {
+            if (!validateUrl(nameUrl)) {
                 ctx.sessionAttribute("flash", "Некорректный URL");
                 ctx.sessionAttribute("flashType", "danger");
                 var page = new BuildUrlPage();
@@ -73,28 +72,30 @@ public class UrlController {
                 ctx.render("index.jte", Collections.singletonMap("page", page));
                 return;
             }
-            if (UrlRepository.findExisting(name)) {
+            if (UrlRepository.findExisting(nameUrl)) {
                 ctx.sessionAttribute("flash", "Страница уже существует");
                 ctx.sessionAttribute("flashType", "info");
                 ctx.redirect(NamedRoutes.urlsPath());
             } else {
 
-                Url resultUrl = new Url(name); //добавить в объект класса урл приведённую к нужному виду имя сайта
+                Url resultUrl = new Url(nameUrl); //добавить в объект класса урл приведённую к нужному виду имя сайта
                 UrlRepository.save(resultUrl);
                 ctx.sessionAttribute("flash", "Страница успешно добавлена");
                 ctx.sessionAttribute("flashType", "success");
                 ctx.redirect(NamedRoutes.urlsPath());
             }
 
-        } catch (ValidationException e) {
-            var page = new BuildUrlPage(beginnerUrl, e.getErrors());
-            ctx.status(422).render("index.jte", Collections.singletonMap("page", page));
-        }
+
     }
     public static boolean validateUrl(String url) {
         String[] schemas = {"http", "https"};
         UrlValidator validator = new UrlValidator(schemas, UrlValidator.ALLOW_LOCAL_URLS);
         return validator.isValid(url);
+    }
+    public static void destroy(Context ctx) throws SQLException {
+        var id = ctx.pathParamAsClass("id", Long.class).get();
+        UrlRepository.delete(id);
+        ctx.redirect(NamedRoutes.urlsPath());
     }
 
 }

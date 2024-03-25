@@ -1,4 +1,5 @@
 @import hexlet.code.dto.UrlsPage
+@import hexlet.code.utils.InfoAboutCreateAndStatus
 @import hexlet.code.utils.NamedRoutes
 @import hexlet.code.utils.FormattedTime
 @param UrlsPage page
@@ -43,13 +44,13 @@ content  = @`
                                 <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
                             </td>
                             <td>
-                                @if(url.getCheckCreatedAt() != null)
-                                    ${FormattedTime.formattedTime(url.getCreatedAt())}
+                                @if(InfoAboutCreateAndStatus.getCheckCreatedAt(url) != null)
+                                    ${FormattedTime.formattedTime(InfoAboutCreateAndStatus.getCheckCreatedAt(url))}
                                     @endif
                             </td>
                             <td>
-                                @if(url.getStatusCode() != null)
-                                    ${url.getStatusCode()}
+                                @if(InfoAboutCreateAndStatus.getStatusCode(url) != null)
+                                    ${InfoAboutCreateAndStatus.getStatusCode(url)}
                                     @endif
                             </td>
                         </tr>

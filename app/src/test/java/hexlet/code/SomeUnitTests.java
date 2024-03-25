@@ -5,7 +5,7 @@ import hexlet.code.dto.UrlPage;
 import hexlet.code.dto.UrlsPage;
 import hexlet.code.model.Url;
 import hexlet.code.model.UrlCheck;
-import hexlet.code.utils.CurrentTime;
+import hexlet.code.utils.FormattedTime;
 import io.javalin.validation.ValidationError;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,15 +21,17 @@ import java.util.Map;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SomeUnitTests {
-    static Timestamp currentTime = CurrentTime.currentTime();
+    static Timestamp currentTime = FormattedTime.currentTime();
     private Url url1;
     private Url url2;
     private UrlCheck urlCheck1;
     @BeforeEach
     public final void setUp() throws IOException, SQLException {
-        url1 = new Url("https://www.youtube.com", currentTime);
+        url1 = new Url("https://www.youtube.com");
+        url1.setCreatedAt(currentTime);
         url1.setId(1L);
-        url2 = new Url("https://www.youtube111.com", currentTime);
+        url2 = new Url("https://www.youtube111.com");
+        url2.setCreatedAt(currentTime);
         url2.setId(2L);
         urlCheck1 = new UrlCheck(200, "title", "h1", "description", 1L, currentTime);
         urlCheck1.setId(1L);

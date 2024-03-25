@@ -1,7 +1,7 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.UrlCheck;
-import hexlet.code.utils.CurrentTime;
+import hexlet.code.utils.FormattedTime;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,7 +15,7 @@ public class CheckRepository extends BaseRepository {
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            var currentTime = CurrentTime.currentTime();
+            var currentTime = FormattedTime.currentTime();
             Integer statusCode = urlCheck.getStatusCode();
 
             preparedStatement.setLong(1, urlCheck.getUrlId());

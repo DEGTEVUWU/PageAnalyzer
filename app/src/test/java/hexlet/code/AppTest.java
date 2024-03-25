@@ -62,7 +62,8 @@ public class AppTest {
     public void testSomeUrlPage() throws SQLException {
         Date actualDate = new Date();
         Timestamp createdAt = new Timestamp(actualDate.getTime());
-        Url url = new Url("https://github.com", createdAt);
+        Url url = new Url("https://github.com");
+        url.setCreatedAt(createdAt);
         UrlRepository.save(url);
         //создали тестовый объект и закинули в БД
 
@@ -88,7 +89,8 @@ public class AppTest {
     public void testSomeUrlCheck() throws SQLException {
         Date actualDate = new Date();
         Timestamp createdAt = new Timestamp(actualDate.getTime());
-        Url url = new Url("https://github.com", createdAt);
+        Url url = new Url("https://github.com");
+        url.setCreatedAt(createdAt);
         UrlRepository.save(url);
         //создали тестовый объект и закинули в БД
 
@@ -105,7 +107,8 @@ public class AppTest {
     }
 
     @Test
-    void testUrlNotFound() {
+    void testUrlNotFound() throws SQLException {
+        UrlRepository.delete(999999L);
         JavalinTest.test(app, (server, client) -> {
             var response = client.get("/urls/999999");
             assertThat(response.code()).isEqualTo(404);

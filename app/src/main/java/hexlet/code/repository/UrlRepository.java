@@ -1,7 +1,9 @@
 package hexlet.code.repository;
 
 import hexlet.code.model.Url;
-import hexlet.code.utils.CurrentTime;
+import hexlet.code.utils.FormattedTime;
+import hexlet.code.utils.NamedRoutes;
+import io.javalin.http.Context;
 
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -19,7 +21,7 @@ public class UrlRepository extends BaseRepository {
         try (var conn = dataSource.getConnection();
              var preparedStatement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
-            var currentTime = CurrentTime.currentTime();
+            var currentTime = FormattedTime.currentTime();
 
             preparedStatement.setString(1, url.getName());
             preparedStatement.setTimestamp(2, currentTime);
@@ -51,6 +53,7 @@ public class UrlRepository extends BaseRepository {
             return Optional.empty();
         }
     }
+
     public static boolean findExisting(String name) throws SQLException {
         var sql = "SELECT * FROM urls WHERE name = ?";
         try (var conn = dataSource.getConnection();
@@ -79,4 +82,15 @@ public class UrlRepository extends BaseRepository {
         }
     }
 
+    public static void delete(Long id) throws SQLException {
+        var sql = "DELETE FROM urls WHERE id = ?";
+        try (var conn = dataSource.getConnection();
+             var stmt = conn.prepareStatement(sql)) {
+
+            stmt.setLong(1, id);
+            stmt.executeUpdate();
+            } catch (SQLException e){
+                e.printStackTrace();
+        }
+    }
 }

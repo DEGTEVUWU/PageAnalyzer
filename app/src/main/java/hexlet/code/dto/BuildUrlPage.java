@@ -1,6 +1,5 @@
 package hexlet.code.dto;
 
-import hexlet.code.BasePage;
 import io.javalin.validation.ValidationError;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

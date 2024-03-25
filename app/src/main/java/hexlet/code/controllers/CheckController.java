@@ -3,6 +3,7 @@ package hexlet.code.controllers;
 import hexlet.code.model.UrlCheck;
 import hexlet.code.repository.CheckRepository;
 import hexlet.code.repository.UrlRepository;
+import hexlet.code.utils.FormattedTime;
 import hexlet.code.utils.NamedRoutes;
 import io.javalin.http.Context;
 import io.javalin.http.InternalServerErrorResponse;
@@ -12,7 +13,6 @@ import kong.unirest.UnirestException;
 import org.jsoup.Jsoup;
 
 import java.sql.SQLException;
-import hexlet.code.utils.CurrentTime;
 
 public class CheckController {
     public static void check(Context ctx) throws SQLException {
@@ -30,13 +30,10 @@ public class CheckController {
             String title = htmlPage.getElementsByTag("title").text();
             String description = htmlPage.select("meta[name = description]").attr("content");
 
-            var currentTime = CurrentTime.currentTime();
+            var currentTime = FormattedTime.currentTime();
             UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, currentTime);
-            try {
-                CheckRepository.saveCheck(urlCheck);
-            } catch (SQLException e) {
-                throw new InternalServerErrorResponse();
-            }
+
+            CheckRepository.saveCheck(urlCheck);
 
             ctx.sessionAttribute("flash", "Страница успешно проверена");
             ctx.sessionAttribute("flashType", "success");
