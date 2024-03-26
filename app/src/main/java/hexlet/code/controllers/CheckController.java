@@ -30,7 +30,8 @@ public class CheckController {
             String description = htmlPage.select("meta[name = description]").attr("content");
 
             var currentTime = FormattedTime.currentTime();
-            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId, currentTime);
+            UrlCheck urlCheck = new UrlCheck(statusCode, title, h1, description, urlId);
+            urlCheck.setCreatedAt(currentTime);
 
             CheckRepository.saveCheck(urlCheck);
 

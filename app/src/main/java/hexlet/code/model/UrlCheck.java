@@ -27,13 +27,12 @@ public class UrlCheck {
         this.description = description;
         this.urlId = urlId;
     }
-    public UrlCheck(Integer statusCode, String title, String h1, String description, Long urlId, Timestamp createdAt) {
+    public UrlCheck(Integer statusCode, String title, String h1, String description, Long urlId) {
         this.statusCode = statusCode;
         this.title = title;
         this.h1 = h1;
         this.description = description;
         this.urlId = urlId;
-        this.createdAt = createdAt;
     }
 
 }
