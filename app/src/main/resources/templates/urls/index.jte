@@ -46,24 +46,23 @@ content  = @`
                                 <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
                             </td>
                             <td>
-                                @if(InfoAboutCreateAndStatus.getCheckCreatedAt(url).isEmpty() ? ""
-                                     : FormattedTime.formattedTime(InfoAboutCreateAndStatus.getCheckCreatedAt(url).orElseThrow(()
-                                     -> new NoSuchElementException("Created_at element not found!")) )
-                                    @endif
-<%--                                    проверить существует ли по заданному урлу проверки и если да - вывести последнюю из них или кинуть ошибку--%>
+                                @if(InfoAboutCreateAndStatus.getCheckCreatedAt(url).isPresent())
+                                    ${FormattedTime.formattedTime(InfoAboutCreateAndStatus.getCheckCreatedAt(url).orElseThrow(()
+                                     -> new NoSuchElementException("Created_at element not found!")))}
+                                @endif
+
                             </td>
                             <td>
-                                @if(InfoAboutCreateAndStatus.getStatusCode(url).isEmpty() ? ""
-                                     : String.valueOf(InfoAboutCreateAndStatus.getStatusCode(url)))
-                                    @endif
+                                @if(InfoAboutCreateAndStatus.getStatusCode(url).isPresent())
+                                    ${InfoAboutCreateAndStatus.getStatusCode(url).orElseThrow(()
+                                         -> new NoSuchElementException("Status element not found!"))}
+                                @endif
                             </td>
                         </tr>
                         </tbody>
                     @endfor
                 </table>
-            @endif
-
-
+                @endif
         </main>
     </div>
 `

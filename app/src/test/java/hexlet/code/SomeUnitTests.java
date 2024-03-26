@@ -33,8 +33,9 @@ public class SomeUnitTests {
         url2 = new Url("https://www.youtube111.com");
         url2.setCreatedAt(currentTime);
         url2.setId(2L);
-        urlCheck1 = new UrlCheck(200, "title", "h1", "description", 1L, currentTime);
+        urlCheck1 = new UrlCheck(200, "title", "h1", "description", 1L);
         urlCheck1.setId(1L);
+        urlCheck1.setCreatedAt(currentTime);
 
     }
     @Test
