@@ -87,7 +87,7 @@ public class UrlRepository extends BaseRepository {
             stmt.setLong(1, id);
             stmt.executeUpdate();
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Deletion is not possible, the entity " + id + "is not in the database");;
         }
     }
 }
