@@ -2,6 +2,8 @@
 @import hexlet.code.utils.InfoAboutCreateAndStatus
 @import hexlet.code.utils.NamedRoutes
 @import hexlet.code.utils.FormattedTime
+@import java.sql.Timestamp
+@import java.util.NoSuchElementException
 @param UrlsPage page
 
 
@@ -44,13 +46,15 @@ content  = @`
                                 <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
                             </td>
                             <td>
-                                @if(InfoAboutCreateAndStatus.getCheckCreatedAt(url) != null)
-                                    ${FormattedTime.formattedTime(InfoAboutCreateAndStatus.getCheckCreatedAt(url))}
+                                @if(InfoAboutCreateAndStatus.getCheckCreatedAt(url).isEmpty() ? ""
+                                     : FormattedTime.formattedTime(InfoAboutCreateAndStatus.getCheckCreatedAt(url).orElseThrow(()
+                                     -> new NoSuchElementException("Created_at element not found!")) )
                                     @endif
+<%--                                    проверить существует ли по заданному урлу проверки и если да - вывести последнюю из них или кинуть ошибку--%>
                             </td>
                             <td>
-                                @if(InfoAboutCreateAndStatus.getStatusCode(url) != null)
-                                    ${InfoAboutCreateAndStatus.getStatusCode(url)}
+                                @if(InfoAboutCreateAndStatus.getStatusCode(url).isEmpty() ? ""
+                                     : String.valueOf(InfoAboutCreateAndStatus.getStatusCode(url)))
                                     @endif
                             </td>
                         </tr>

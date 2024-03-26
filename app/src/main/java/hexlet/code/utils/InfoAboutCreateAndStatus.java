@@ -4,20 +4,23 @@ import hexlet.code.model.Url;
 import hexlet.code.repository.CheckRepository;
 
 import java.sql.Timestamp;
+import java.util.Optional;
 
 public class InfoAboutCreateAndStatus {
-    public static final Integer getStatusCode(Url url)  {
+    public static final Optional<Integer> getStatusCode(Url url)  {
         if (CheckRepository.findExisting(url.getId())) {
             var list = CheckRepository.find(Math.toIntExact(url.getId()));
-            return list.get(list.size() - 1).getStatusCode();
+            return Optional.of(list.get(list.size() - 1).getStatusCode());
         }
-        return  null;
+        return Optional.empty();
     }
-    public static final Timestamp getCheckCreatedAt(Url url) {
+    public static final Optional<Timestamp> getCheckCreatedAt(Url url) {
         if (CheckRepository.findExisting(url.getId())) {
             var list = CheckRepository.find(Math.toIntExact(url.getId()));
-            return list.get(list.size() - 1).getCreatedAt();
+            if (!list.isEmpty()) {
+                return Optional.of(list.get(list.size() - 1).getCreatedAt());
+            }
         }
-        return null;
+        return Optional.empty();
     }
 }
