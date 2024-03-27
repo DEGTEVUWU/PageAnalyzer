@@ -6,7 +6,7 @@ import hexlet.code.repository.CheckRepository;
 import java.sql.Timestamp;
 import java.util.Optional;
 
-public class InfoAboutCreateAndStatus {
+public class UrlService {
     public static final Optional<Integer> getStatusCode(Url url)  {
         if (CheckRepository.findExisting(url.getId())) {
             var list = CheckRepository.find(Math.toIntExact(url.getId()));

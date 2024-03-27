@@ -1,7 +1,8 @@
 @import hexlet.code.dto.UrlsPage
-@import hexlet.code.utils.InfoAboutCreateAndStatus
+@import hexlet.code.utils.UrlService
 @import hexlet.code.utils.NamedRoutes
 @import hexlet.code.utils.FormattedTime
+@import hexlet.code.utils.UrlService
 @import java.sql.Timestamp
 @import java.util.NoSuchElementException
 @param UrlsPage page
@@ -46,15 +47,15 @@ content  = @`
                                 <a href="${NamedRoutes.urlPath(url.getId())}">${url.getName()} </a>
                             </td>
                             <td>
-                                @if(InfoAboutCreateAndStatus.getCheckCreatedAt(url).isPresent())
-                                    ${FormattedTime.formattedTime(InfoAboutCreateAndStatus.getCheckCreatedAt(url).orElseThrow(()
+                                @if(UrlService.getCheckCreatedAt(url).isPresent())
+                                    ${FormattedTime.formattedTime(UrlService.getCheckCreatedAt(url).orElseThrow(()
                                      -> new NoSuchElementException("Created_at element not found!")))}
                                 @endif
 
                             </td>
                             <td>
-                                @if(InfoAboutCreateAndStatus.getStatusCode(url).isPresent())
-                                    ${InfoAboutCreateAndStatus.getStatusCode(url).orElseThrow(()
+                                @if(UrlService.getStatusCode(url).isPresent())
+                                    ${UrlService.getStatusCode(url).orElseThrow(()
                                          -> new NoSuchElementException("Status element not found!"))}
                                 @endif
                             </td>
