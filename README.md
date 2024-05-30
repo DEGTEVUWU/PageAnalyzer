@@ -22,8 +22,8 @@
 ### Подключи и используй локально ###
 
 ```
-git clone git@github.com:DEGTEVUWU/java-project-72.git
-cd java-project-72
+git clone git@github.com:DEGTEVUWU/PageAnalyzer.git
+cd PageAnalyzer
 make run
 ```
 
