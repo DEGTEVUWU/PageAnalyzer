@@ -102,7 +102,7 @@ public class AppTest {
             assertThat(UrlRepository.findExisting("https://github.com")).isTrue();
             assertThat(CheckRepository.findExisting(url.getId())).isTrue();
             assertThat(CheckRepository.find(Math.toIntExact(url.getId())).get(0).getTitle())
-                    .isEqualTo("GitHub: Let’s build from here · GitHub");
+                    .isEqualTo("GitHub: Let’s build from here · GitHub Twitch TikTok");
         }));
     }
 
